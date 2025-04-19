@@ -36,7 +36,7 @@ const collectionMint = generateSigner(umi);
 const transaction = await createNft(umi, {
   mint: collectionMint,
   name: "test collection",
-  symbol: "MYCOL",
+  symbol: "TC",
   uri: "https://raw.githubusercontent.com/kakaijiro/solana-nft-test/main/metadata.json",
   sellerFeeBasisPoints: percentAmount(0),
   isCollection: true,
