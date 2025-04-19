@@ -1,0 +1,5 @@
+{
+  "name": "Test NFT",
+  "description": "A test NFT for the new-nft project",
+  "image": "https://raw.githubusercontent.com/kakaijiro/solana-nft-test/main/pokky-gogh-nft.jpg"
+}
