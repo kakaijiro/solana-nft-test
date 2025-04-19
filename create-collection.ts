@@ -8,15 +8,16 @@ import {
   getExplorerLink,
   getKeypairFromFile,
 } from "@solana-developers/helpers";
+import { createUmi } from "@metaplex-foundation/umi-bundle-defaults";
 import {
-  createUmi,
-  keypairIdentity,
   percentAmount,
-} from "@metaplex-foundation/umi-bundle-defaults";
+  keypairIdentity,
+  generateSigner,
+} from "@metaplex-foundation/umi";
 import { Connection, LAMPORTS_PER_SOL, clusterApiUrl } from "@solana/web3.js";
-import { generateSigner } from "@metaplex-foundation/umi";
 
-const connection = new Connection(clusterApiUrl("devnet"));
+const rpcUrl = clusterApiUrl("devnet");
+const connection = new Connection(rpcUrl);
 const user = await getKeypairFromFile("/home/jirok/.config/solana/id.json");
 console.log(`user: ${user.publicKey.toBase58()}`);
 
@@ -28,12 +29,12 @@ await airdropIfRequired(
 );
 console.log(`Airdropped 1 SOL to ${user.publicKey.toBase58()}`);
 
-const umi = createUmi("https://api.devnet.solana.com");
+const umi = createUmi(rpcUrl);
 umi.use(mplTokenMetadata());
 const umiUser = umi.eddsa.createKeypairFromSecretKey(user.secretKey);
 umi.use(keypairIdentity(umiUser));
 const collectionMint = generateSigner(umi);
-const transaction = await createNft(umi, {
+const transaction = createNft(umi, {
   mint: collectionMint,
   name: "test collection",
   symbol: "TC",
