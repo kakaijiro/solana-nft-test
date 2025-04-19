@@ -37,7 +37,7 @@ const transaction = await createNft(umi, {
   mint: collectionMint,
   name: "test collection",
   symbol: "MYCOL",
-  uri: "https://example.com/metadata.json",
+  uri: "https://row.github.com/metadata.json",
   sellerFeeBasisPoints: percentAmount(0),
   isCollection: true,
 });
