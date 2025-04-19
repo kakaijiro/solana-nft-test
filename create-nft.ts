@@ -52,14 +52,17 @@ const transaction = createNft(umi, {
   name: "Test NFT",
   uri: "https://raw.githubusercontent.com/kakaijiro/solana-nft-test/main/test-nft.json",
   sellerFeeBasisPoints: percentAmount(0),
-  collection: { key: collectionAddress, verified: false },
+  collection: {
+    key: collectionAddress,
+    verified: false, // the varification process that this NFT is a member of the collection will be conducted later, and then marked as verified by using verifyCollection()
+  },
 });
 await transaction.sendAndConfirm(umi);
 const createdNft = await fetchDigitalAsset(umi, mint.publicKey);
 console.log(
   `Created NFT 🖼️. Address is ${getExplorerLink(
     "address",
-    createdNft.mint.publicKey,
+    createdNft.mint.publicKey, // createdNft.publicKey is also feasible
     "devnet"
   )}`
 );
