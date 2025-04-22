@@ -58,7 +58,7 @@ const tokenAccount = await getAssociatedTokenAddress(
 // transfer nft transaction
 const asset = await fetchDigitalAsset(umi, mintAddress2);
 const tokenStandardOpt = unwrapOption(asset.metadata.tokenStandard);
-// if (!tokenStandardOpt) throw new Error("Token standard not found");
+if (!tokenStandardOpt) throw new Error("Token standard not found");
 
 console.log(`Token standard: ${tokenStandardOpt}`);
 console.log(`Now transferring NFT...`);
