@@ -31,5 +31,17 @@ const fromTokenAccount = await getOrCreateAssociatedTokenAccount(
 const senderBalance = await connection.getTokenAccountBalance(
   fromTokenAccount.address
 );
-
 console.log("User NFT balance:", senderBalance.value.uiAmount);
+
+const recipient = new PublicKey("YPMACqnPYhvgBC5VHQuHiDpbNFnhuWjhpAAzhSNLXcp"); // wallet
+console.log(`Recipient: ${recipient.toBase58()}`);
+const toTokenAccount = await getOrCreateAssociatedTokenAccount(
+  connection,
+  user,
+  mintAddress,
+  recipient
+);
+const recipientBalance = await connection.getTokenAccountBalance(
+  toTokenAccount.address
+);
+console.log("Recipient NFT balance:", recipientBalance.value.uiAmount);
